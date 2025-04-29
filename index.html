@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расчет баллов для чеков</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            height: 100vh;
+            background-image: url('https://i.ibb.co/fdYbd2S4/Chat-GPT-Image-29-2025-10-40-12-fotor-2025042913220.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 400px;
+            margin: 40px auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            color: #000;
+        }
+
+        h1, h2, #result {
+            text-align: center;
+            color: #fff;
+        }
+
+        #finalMessage {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Расчет баллов по чекам</h1>
+    <form id="calculateForm">
+        <div class="form-group">
+            <label for="numberOfChecks">Количество чеков:</label>
+            <input type="number" id="numberOfChecks" value="0" min="0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="bonusCard">Бонусная карта:</label>
+            <select id="bonusCard" required>
+                <option value="with">С бонусной картой</option>
+                <option value="without">Без бонусной карты</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="importItems">Количество позиций импорта в чеках:</label>
+            <input type="number" id="importItems" value="0" min="0">
+        </div>
+
+        <div class="form-group">
+            <label for="gastroItems">Количество позиций гастрономии в чеках:</label>
+            <input type="number" id="gastroItems" value="0" min="0">
+        </div>
+
+        <button type="button" onclick="calculatePoints()">Рассчитать баллы</button>
+    </form>
+
+    <h2>Результат:</h2>
+    <div id="finalMessage"></div>
+
+    <script>
+        function calculatePoints() {
+            const numberOfChecks = parseInt(document.getElementById('numberOfChecks').value);
+            const bonusCard = document.getElementById('bonusCard').value;
+            const importItems = parseInt(document.getElementById('importItems').value);
+            const gastroItems = parseInt(document.getElementById('gastroItems').value);
+
+            let totalPoints = 0;
+
+            if (bonusCard === 'with') {
+                totalPoints += numberOfChecks * 3;
+                totalPoints += importItems * 2;
+                totalPoints += gastroItems * 2;
+            } else {
+                totalPoints += numberOfChecks * 1;
+                totalPoints += importItems * 1;
+                totalPoints += gastroItems * 1;
+            }
+
+            // Отображаем сообщение с баллами только в одном месте
+            document.getElementById('finalMessage').textContent = `🎉Молодец🎉 Вы набрали ${totalPoints} баллов💰!`;
+        }
+    </script>
+
+</body>
+</html>
+
+
