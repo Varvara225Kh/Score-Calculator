@@ -44,7 +44,6 @@
         #finalMessage {
             font-size: 1.4em;
             font-weight: bold;
-            color: #fff;
             text-align: center;
             margin-top: 10px;
         }
@@ -118,8 +117,12 @@
                 totalPoints += gastroItems * 1;
             }
 
-            // Отображаем сообщение с баллами только в одном месте
-            document.getElementById('finalMessage').textContent = `🎉Молодец🎉 Вы набрали ${totalPoints} баллов💰!`;
+            // Добавляем проверку на 0 баллов
+            if (totalPoints === 0) {
+                document.getElementById('finalMessage').textContent = "😢Увы, у Вас 0 баллов😔";
+            } else {
+                document.getElementById('finalMessage').textContent = `🎉Молодец🎉 Вы набрали ${totalPoints} баллов💰!`;
+            }
         }
     </script>
 
